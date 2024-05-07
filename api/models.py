@@ -10,3 +10,4 @@ class Producto (models.Model):
     precio = models.CharField(max_length=10)
     fecha = models.CharField(max_length=10)
     
+    

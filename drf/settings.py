@@ -131,5 +131,3 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 }
 
-WEBPAY_FICTICIA_API_KEY = 'clave_api_ficticia'
-WEBPAY_FICTICIA_SHARED_SECRET = 'secreto_compartido_ficticio'

@@ -7,6 +7,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.urls import reverse_lazy, reverse
 from django.http import JsonResponse, HttpResponseRedirect
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework import generics
 import random
 
 
@@ -16,6 +19,8 @@ class ProductoViewSet(viewsets.ModelViewSet):
     queryset=Producto.objects.all()
     serializer_class = ProductoSerializer
     
+
+
     
 def listar_productos(request):
     productos = Producto.objects.all()
@@ -56,3 +61,10 @@ def eliminar_producto(request, pk):
 
 
 
+class ProductoList(generics.ListCreateAPIView):
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
+
+class ProductoDetail(generics.RetrieveDestroyAPIView):
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer

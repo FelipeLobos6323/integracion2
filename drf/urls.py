@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1', include('api.urls')),
     path('docs/', include_docs_urls(title='Documentacion de api')),
+    
     path('listar_productos/', views.listar_productos, name='listar_productos'),
     path('listar_productos/', views.listar_productos, name='listar_productos'),
     path('crear_producto/', views.crear_producto, name='crear_producto'),
