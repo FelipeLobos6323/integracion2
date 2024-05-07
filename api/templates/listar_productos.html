@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +7,7 @@
 </head>
 <body>
     <h1>Listado de Productos</h1>
+    <a href="{% url 'crear_producto' %}"><button>Crear Producto</button></a>
     <table>
         <thead>
             <tr>
@@ -17,6 +17,7 @@
                 <th>Nombre</th>
                 <th>Precio</th>
                 <th>Fecha</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,11 @@
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.precio }}</td>
                 <td>{{ producto.fecha }}</td>
+                <td>
+                    <a href="{% url 'ver_producto' producto.pk %}"><button>Ver</button></a>
+                    <a href="{% url 'editar_producto' producto.pk %}"><button>Editar</button></a>
+                    <a href="{% url 'eliminar_producto' producto.pk %}"><button>Eliminar</button></a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

@@ -21,11 +21,19 @@ from rest_framework.documentation import include_docs_urls
 from api import views 
 
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1', include('api.urls')),
     path('docs/', include_docs_urls(title='Documentacion de api')),
-    path('listar_productos/', views.listar_productos, name='listar_productos')
+    path('listar_productos/', views.listar_productos, name='listar_productos'),
+    path('listar_productos/', views.listar_productos, name='listar_productos'),
+    path('crear_producto/', views.crear_producto, name='crear_producto'),
+    path('ver_producto/<int:pk>/', views.ver_producto, name='ver_producto'),
+    path('editar_producto/<int:pk>/', views.editar_producto, name='editar_producto'),
+    path('eliminar_producto/<int:pk>/', views.eliminar_producto, name='eliminar_producto'),
+    
     
     
 ]
