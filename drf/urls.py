@@ -33,6 +33,7 @@ urlpatterns = [
     path('ver_producto/<int:pk>/', views.ver_producto, name='ver_producto'),
     path('editar_producto/<int:pk>/', views.editar_producto, name='editar_producto'),
     path('eliminar_producto/<int:pk>/', views.eliminar_producto, name='eliminar_producto'),
+    #----------WEBPAY---------
     
     
     

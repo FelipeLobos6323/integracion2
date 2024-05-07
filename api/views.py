@@ -5,7 +5,9 @@ from .serializer import ProductoSerializer
 from .models import Producto
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.http import JsonResponse, HttpResponseRedirect
+import random
 
 
 # Create your views here.
@@ -50,3 +52,7 @@ def eliminar_producto(request, pk):
         producto.delete()
         return redirect('listar_productos')
     return render(request, 'eliminar_producto.html', {'producto': producto})
+
+
+
+
