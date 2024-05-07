@@ -60,11 +60,13 @@ def eliminar_producto(request, pk):
 
 
 
-
-class ProductoList(generics.ListCreateAPIView):
-    queryset = Producto.objects.all()
-    serializer_class = ProductoSerializer
-
-class ProductoDetail(generics.RetrieveDestroyAPIView):
-    queryset = Producto.objects.all()
-    serializer_class = ProductoSerializer
+#-------------------VISTA CLIENTE CONSULTAR PRECIO-----------------
+def consultar_precios(request):
+    # Obtener todos los productos
+    productos = Producto.objects.all()
+    # Crear una lista de precios de productos
+    precios = [{'nombre': producto.nombre, 'precio': producto.precio, 'marca': producto.marca} for producto in productos]
+    # Renderizar la plantilla con la lista de precios
+    return render(request, 'consultar_precios.html', {'precios': precios})
+    
+    

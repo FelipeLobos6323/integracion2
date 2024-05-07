@@ -24,6 +24,7 @@ from api import views
 
 
 urlpatterns = [
+    path('', views.listar_productos, name='listar_productos'),
     path('admin/', admin.site.urls),
     path('api/v1', include('api.urls')),
     path('docs/', include_docs_urls(title='Documentacion de api')),
@@ -34,7 +35,8 @@ urlpatterns = [
     path('ver_producto/<int:pk>/', views.ver_producto, name='ver_producto'),
     path('editar_producto/<int:pk>/', views.editar_producto, name='editar_producto'),
     path('eliminar_producto/<int:pk>/', views.eliminar_producto, name='eliminar_producto'),
-    #----------WEBPAY---------
+    path('consultar_precios/', views.consultar_precios, name='consultar_precios')
+    #----------CONSULTAR PRECIO CLIENTE---------
     
     
     
