@@ -2,7 +2,8 @@
 
 # En este repositorio hicimos una Rest Framework que contiene una API REST
 # Para poder ejecutar el repositorio tenemos que ir a Visual Studio Code,
-# Luego tenemos que abrir una Nueva Terminal,Después colocaremos el siguiente comando: python manage.py runserver y se ejecutará el repositorio.
+# Luego tenemos que abrir una Nueva Terminal,Después colocaremos el siguiente comando: pip install -r requirements.txt con este comando instalaremos todas las dependencias utilizadas 
+# en el repositorio posteriormente colocaremos el siguiente comando: python manage.py runserver y se ejecutará el repositorio.
 # Cuando este listo tendremos que ir a nuestro navegador y colocar la siguiente ip : http://127.0.0.1:8000/
 # Al momento de entrar en la url tenemos 4 vistas disponibles que son Administrador, Vendedor, Bodeguero y Cliente.
 # En la vista Administrador tenemos el listado de productos junto con su información y también podemos integrar nuevos productos al seleccionar "Crear Producto",
