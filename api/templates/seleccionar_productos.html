@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bodeguero</title>
+</head>
+<body>
+    <h1>Bodeguero</h1>
+    <form action="{% url 'ordenar_productos' %}" method="post">
+        {% csrf_token %}
+        <label for="producto">Selecciona un producto:</label>
+        <select name="producto" id="producto">
+            {% for producto in productos %}
+                {% if producto.stock > 0 %}
+                    <option value="{{ producto.nombre }}">{{ producto.nombre }} - Stock: {{ producto.stock }}</option>
+                {% endif %}
+            {% empty %}
+                <option disabled>No hay productos disponibles</option>
+            {% endfor %}
+        </select>
+        <!-- Botón de envío para enviar el formulario y realizar la acción -->
+        <button type="submit">Enviar</button>
+        
+    </form>
+</body>
+</html>
