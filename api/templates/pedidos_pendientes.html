@@ -34,7 +34,7 @@
                 <td>
                     <form action="{% url 'eliminar_pedido' pedido.pk %}" method="post">
                         {% csrf_token %}
-                        <button type="submit">Pedido Entregado</button>
+                        <button type="submit">Pedido con stock</button>
                     </form>
                 
                 </td>
