@@ -14,3 +14,4 @@
 # botones que son "Pedido con stock" que al momento de tener stock disponible se apreta el boton para mandar la informacion y poder realizar el despacho, y el boton de
 # "Pedido sin stock" que significa que no hay stock disponible y se elimina el formulario. 
 # En la vista cliente podemos reflejar el nombre del producto, marca del producto y el precio correspondiente.
+# y para finalizar para poder ingresar a la documentacion de la api tenemos que ingresar a esta url : "http://127.0.0.1:8000/docs/"
