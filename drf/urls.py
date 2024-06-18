@@ -43,6 +43,9 @@ urlpatterns = [
     path('pedidos_pendientes/', views.pedidos_pendientes, name='pedidos_pendientes'),
     path('procesar_compra/', views.procesar_compra, name='procesar_compra'),
     path('eliminar_pedido/<int:pedido_id>/', views.eliminar_pedido, name='eliminar_pedido'),
+    #----------Crear usuario--------------------#
+    path('crear_usuario_interno/', views.crear_usuario_interno, name='crear_usuario_interno'),
+    path('detalle_usuario_interno/<int:user_id>/', views.detalle_usuario_interno, name='detalle_usuario_interno'),
     
     
 ]

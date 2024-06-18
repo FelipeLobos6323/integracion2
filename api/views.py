@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProductoForm
 from rest_framework import viewsets
-from .serializer import ProductoSerializer
+from .serializer import ProductoSerializer, ClienteSerializer, PedidoSerializer
 from .models import Producto, Cliente, Pedido
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -12,13 +12,21 @@ from rest_framework.response import Response
 from rest_framework import generics
 import random
 from django.http import HttpResponse
+from .forms import UserCreationForm
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User  # Asegúrate de importar correctamente el modelo User
+from .forms import UserCreationForm
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseNotFound
+
 
 # Create your views here.
 
 class ProductoViewSet(viewsets.ModelViewSet):
     queryset=Producto.objects.all()
+
     serializer_class = ProductoSerializer
-    
+
 
 
     
@@ -126,6 +134,31 @@ def eliminar_pedido(request, pedido_id):
 def seleccionar_productos(request):
     productos = Producto.objects.all().values('nombre', 'stock')
     return render(request, 'seleccionar_productos.html', {'productos': productos})
+
+#-------------------------Crear usuario----------------------------
+
+def crear_usuario_interno(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Redirigir a la página de detalle de usuario con el id del usuario creado
+            return redirect('detalle_usuario_interno', user.id)
+    else:
+        form = UserCreationForm()
+    
+    return render(request, 'crear_usuario_interno.html', {'form': form})
+
+#------------------------ Ver usuarios ----------------------------------
+# Ejemplo de vista para listar usuarios internos
+def detalle_usuario_interno(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return HttpResponseNotFound("Usuario no encontrado")
+    
+    return render(request, 'detalle_usuario_interno.html', {'user': user})
+
 
 
     
