@@ -18,7 +18,8 @@ from django.contrib.auth.models import User  # Asegúrate de importar correctame
 from .forms import UserCreationForm
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseNotFound
-
+from .forms import RegistroUsuarioForm
+from django.contrib.auth import login, authenticate
 
 # Create your views here.
 
@@ -37,6 +38,10 @@ def listar_productos(request):
 def index(request):
     productos = Producto.objects.all()
     return render(request, 'index.html', {'productos': productos})    
+
+def vista_administrador(request):
+    productos = Producto.objects.all()
+    return render(request, 'vista_administrador.html', {'productos': productos})   
 
 def crear_producto(request):
     if request.method == 'POST':
@@ -137,28 +142,36 @@ def seleccionar_productos(request):
 
 #-------------------------Crear usuario----------------------------
 
-def crear_usuario_interno(request):
+def registro_usuario(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistroUsuarioForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            # Redirigir a la página de detalle de usuario con el id del usuario creado
-            return redirect('detalle_usuario_interno', user.id)
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
     else:
-        form = UserCreationForm()
-    
-    return render(request, 'crear_usuario_interno.html', {'form': form})
+        form = RegistroUsuarioForm()
+    return render(request, 'registro_usuario.html', {'form': form})
 
-#------------------------ Ver usuarios ----------------------------------
-# Ejemplo de vista para listar usuarios internos
-def detalle_usuario_interno(request, user_id):
-    try:
-        user = User.objects.get(id=user_id)
-    except User.DoesNotExist:
-        return HttpResponseNotFound("Usuario no encontrado")
-    
-    return render(request, 'detalle_usuario_interno.html', {'user': user})
+#----------------Ver usuarios creados------------------------
+from django.contrib.auth.models import User
 
+def listar_usuarios(request):
+    usuarios = User.objects.all()
+    return render(request, 'listar_usuarios.html', {'usuarios': usuarios})
+
+#---------------Buscar producto por codigo-------------------
+# views.py
+
+def buscar_producto(request):
+    productos = None
+    if request.method == 'POST':
+        codigo = request.POST.get('codigo')
+        productos = Producto.objects.filter(codigoProducto=codigo)
+    return render(request, 'buscar_producto.html', {'productos': productos})
 
 
     

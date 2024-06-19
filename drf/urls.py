@@ -44,8 +44,11 @@ urlpatterns = [
     path('procesar_compra/', views.procesar_compra, name='procesar_compra'),
     path('eliminar_pedido/<int:pedido_id>/', views.eliminar_pedido, name='eliminar_pedido'),
     #----------Crear usuario--------------------#
-    path('crear_usuario_interno/', views.crear_usuario_interno, name='crear_usuario_interno'),
-    path('detalle_usuario_interno/<int:user_id>/', views.detalle_usuario_interno, name='detalle_usuario_interno'),
+    path('registro_usuario/', views.registro_usuario, name='registro_usuario'),
+    path('usuarios/', views.listar_usuarios, name='listar_usuarios'),
+    #----------Buscar producto por codigo-------
+    path('buscar_producto/', views.buscar_producto, name='buscar_producto'),
+    path('vista_administrador/', views.vista_administrador, name='vista_administrador'),
     
     
 ]

@@ -4,6 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eliminar Producto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+        }
+
+        form button[type="submit"],
+        a {
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        form button[type="submit"]:hover,
+        a:hover {
+            background-color: #c0392b;
+        }
+    </style>
 </head>
 <body>
     <h1>Eliminar Producto</h1>
@@ -11,7 +54,7 @@
     <form method="post">
         {% csrf_token %}
         <button type="submit">Eliminar</button>
+        <a href="{% url 'listar_productos' %}">Cancelar</a>
     </form>
-    <a href="{% url 'listar_productos' %}">Cancelar</a>
 </body>
 </html>

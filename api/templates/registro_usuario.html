@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Producto</title>
+    <title>Registro de Usuario</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,7 +36,8 @@
         }
 
         form input[type="text"],
-        form input[type="number"] {
+        form input[type="email"],
+        form input[type="password"] {
             width: calc(100% - 20px);
             padding: 10px;
             margin-bottom: 15px;
@@ -80,16 +81,16 @@
     </style>
 </head>
 <body>
-    <h1>Crear Producto</h1>
+    <h1>Registro de Usuario</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Guardar</button>
+        <button type="submit">Registrar</button>
     </form>
 
     <div class="back-button">
-        <a href="{% url 'listar_productos' %}">
-            <button>Volver a la Página Anterior</button>
+        <a href="{% url 'index' %}">
+            <button>Volver a la Página Principal</button>
         </a>
     </div>
 

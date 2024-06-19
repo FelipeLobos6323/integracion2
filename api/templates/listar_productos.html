@@ -4,6 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Productos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
     <h1>Listado de Productos</h1>
@@ -34,17 +92,15 @@
                 <td>{% if producto.disponible %}Sí{% else %}No{% endif %}</td>
                 <td>{{ producto.stock }}</td>  
                 <td>
-                    
                     <a href="{% url 'editar_producto' producto.pk %}"><button>Editar</button></a>
                     <a href="{% url 'eliminar_producto' producto.pk %}"><button>Eliminar</button></a>
-                    
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <a href="{% url 'index' %}"><button>Volver a la Página Principal</button></a>
+
 </body>
-<br>
-<br>
-<a href="{% url 'index' %}"><button>Volver a la Página Principal</button></a>
 </html>

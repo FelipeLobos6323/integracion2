@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultar Precios</title>
+    <title>Lista de Usuarios</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,34 +21,40 @@
         }
 
         table {
-            width: 80%;
+            width: 100%;
+            max-width: 600px;
             border-collapse: collapse;
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 5px;
             overflow: hidden;
-            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        th, td {
+        table th, table td {
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
 
-        th {
+        table th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
             background-color: #f2f2f2;
         }
 
-        tbody tr:hover {
-            background-color: #f9f9f9;
+        table tr:hover {
+            background-color: #ddd;
         }
 
         a {
             text-decoration: none;
             display: inline-block;
+            margin-top: 20px;
             padding: 10px 20px;
-            background-color: #3498db;
+            background-color: #e74c3c;
             color: white;
             border: none;
             border-radius: 5px;
@@ -57,32 +63,28 @@
         }
 
         a:hover {
-            background-color: #2980b9;
+            background-color: #c0392b;
         }
     </style>
 </head>
 <body>
-    <h1>Menú Cliente - Consultar Precios</h1>
-    <table>
+    <h1>Lista de Usuarios</h1>
+    <table border="1">
         <thead>
             <tr>
-                <th>Producto</th>
-                <th>Marca</th>
-                <th>Precio</th>
+                <th>Username</th>
+                <th>Email</th>
             </tr>
         </thead>
         <tbody>
-            {% for producto in precios %}
+            {% for usuario in usuarios %}
             <tr>
-                <td>{{ producto.nombre }}</td>
-                <td>{{ producto.marca }}</td>
-                <td>${{ producto.precio }}</td>
+                <td>{{ usuario.username }}</td>
+                <td>{{ usuario.email }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-
     <a href="{% url 'index' %}">Volver a la Página Principal</a>
-
 </body>
 </html>
