@@ -2,7 +2,10 @@ from django.test import TestCase
 from django.urls import reverse
 from .models import Producto, Cliente, Pedido
 from .forms import ProductoForm
-
+from django.test import TestCase
+from django.urls import reverse
+from django.contrib.auth.models import User
+from .forms import RegistroUsuarioForm
 #Pruebas de integracion
 class ProductoModelTest(TestCase):
     def test_crear_producto_post(self):
@@ -47,7 +50,7 @@ class ClienteModelTest(TestCase):
             email='juan@example.com',
             direccion='Calle Falsa 123'
         )
-        self.assertEqual(cliente.nombre, 'Juan')
+        self.assertEqual(cliente.nombre, 'Pedro')
         self.assertEqual(cliente.email, 'juan@example.com')
 class PedidoModelTest(TestCase):
     def test_creacion_pedido(self):
@@ -209,3 +212,72 @@ class ConsultarPreciosViewTest(TestCase):
         self.assertContains(response, '10.99')
         self.assertContains(response, 'Producto de prueba')
 
+
+
+class RegistroUsuarioTestCase(TestCase):
+    def test_registro_usuario_form(self):
+        form_data = {
+            'username': 'testuser',
+            'password1': 'testpassword123',
+            'password2': 'testpassword123',
+        }
+        form = RegistroUsuarioForm(data=form_data)
+        self.assertTrue(form.is_valid())
+
+    def test_registro_usuario_view(self):
+        form_data = {
+            'username': 'testuser',
+            'password1': 'testpassword123',
+            'password2': 'testpassword123',
+        }
+        response = self.client.post(reverse('registro_usuario'), data=form_data)
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(User.objects.filter(username='testuser').exists())
+
+class ListarUsuariosTestCase(TestCase):
+    def test_listar_usuarios_view(self):
+        User.objects.create_user(username='user1', password='password123')
+        response = self.client.get(reverse('listar_usuarios'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'listar_usuarios.html')
+        self.assertIn('usuarios', response.context)
+        self.assertEqual(len(response.context['usuarios']), 1)
+
+class BuscarProductoTestCase(TestCase):
+    def setUp(self):
+        self.producto = Producto.objects.create(codigoProducto='12345', nombre='Producto1')
+
+    def test_buscar_producto_view(self):
+        response = self.client.post(reverse('buscar_producto'), {'codigo': '12345'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'buscar_producto.html')
+        self.assertIn('productos', response.context)
+        self.assertEqual(len(response.context['productos']), 1)
+        self.assertEqual(response.context['productos'][0].codigoProducto, '12345')
+
+class IntegracionRegistroListarUsuariosTestCase(TestCase):
+    def test_registro_y_listar_usuarios(self):
+        form_data = {
+            'username': 'testuser',
+            'password1': 'testpassword123',
+            'password2': 'testpassword123',
+        }
+        self.client.post(reverse('registro_usuario'), data=form_data)
+        response = self.client.get(reverse('listar_usuarios'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('testuser', [user.username for user in response.context['usuarios']])
+
+class IntegracionRegistroBuscarProductoTestCase(TestCase):
+    def setUp(self):
+        self.producto = Producto.objects.create(codigoProducto='12345', nombre='Producto1')
+
+    def test_registro_y_buscar_producto(self):
+        form_data = {
+            'username': 'testuser',
+            'password1': 'testpassword123',
+            'password2': 'testpassword123',
+        }
+        self.client.post(reverse('registro_usuario'), data=form_data)
+        response = self.client.post(reverse('buscar_producto'), {'codigo': '12345'})
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Producto1', [producto.nombre for producto in response.context['productos']])
