@@ -7,16 +7,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: #f8f9fa; /* Color de fondo opcional */
             margin: 0;
+            padding: 20px; /* Espacio alrededor del contenido */
         }
 
         .button-container {
             text-align: center;
+            margin-bottom: 20px; /* Espacio inferior para separar de otros contenidos */
         }
 
         .button-container a {
@@ -24,21 +22,31 @@
         }
 
         .button-container button {
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 15px 30px;
+            font-size: 18px;
             cursor: pointer;
             background-color: #3498db;
             color: white;
             border: none;
             border-radius: 5px;
-            margin: 10px 0;
-            display: block;
-            width: 200px; /* Ancho fijo para todos los botones */
+            margin: 10px;
+            display: inline-block;
+            width: 100%; /* Ancho del botón al 100% del contenedor */
+            max-width: 300px; /* Ancho máximo del botón */
             transition: background-color 0.3s ease;
         }
 
         .button-container button:hover {
             background-color: #2980b9;
+        }
+
+        /* Estilo específico para el botón "Volver a la Página Principal" */
+        .button-container .back-button {
+            background-color: #e74c3c; /* Rojo */
+        }
+
+        .button-container .back-button:hover {
+            background-color: #c0392b; /* Rojo más oscuro al pasar el cursor */
         }
     </style>
 </head>
@@ -49,7 +57,7 @@
         <a href="{% url 'listar_productos' %}"><button>Listar productos</button></a>
         <a href="{% url 'listar_usuarios' %}"><button>Lista de Usuarios</button></a>
         <a href="{% url 'buscar_producto' %}"><button>Buscar producto por código</button></a>
-        <a href="{% url 'index' %}"><button>Volver a la Página Principal</button></a>
+        <a href="{% url 'index' %}"><button class="back-button">Volver a la Página Principal</button></a>
     </div>
 
 </body>

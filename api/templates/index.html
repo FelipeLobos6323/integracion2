@@ -3,30 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>FERREMAS</title>
     <style>
         body {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
             margin: 0;
-            background-color: #f0f0f0; /* Color de fondo opcional */
+            height: 100vh;
+            background: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .title {
+            font-size: 3em;
+            margin: 20px 0;
+            color: #333;
+            font-family: 'Roboto Slab', serif; /* Fuente elegante */
         }
 
         .button-container {
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .button-link {
             text-decoration: none;
-            display: inline-block;
-            margin-bottom: 10px;
         }
 
         .button-link button {
-            padding: 10px 20px;
-            font-size: 16px;
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            font-size: 18px;
             cursor: pointer;
             background-color: #3498db;
             color: white;
@@ -38,18 +50,44 @@
         .button-link button:hover {
             background-color: #2980b9;
         }
+
+        .button-link button img {
+            width: 24px; /* Ajustar tamaño de acuerdo al diseño */
+            height: 24px; /* Ajustar tamaño de acuerdo al diseño */
+            margin-right: 10px;
+        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+    <div class="title">FERREMAS</div>
+
     <div class="button-container">
-        <a href="{% url 'vista_administrador' %}" class="button-link"><button>Vista Administrador</button></a>
-        <br><br>
-        <a href="{% url 'vendedor' %}" class="button-link"><button>Vendedor</button></a>
-        <br><br>
-        <a href="{% url 'pedidos_pendientes' %}" class="button-link"><button>Bodeguero</button></a>
-        <br><br>
-        <a href="{% url 'consultar_precios' %}" class="button-link"><button>Cliente</button></a>
+        <a href="{% url 'vista_administrador' %}" class="button-link">
+            <button>
+                <img src="https://img.icons8.com/ios/50/000000/user-group-man-man.png" alt="Admin Icon">
+                Vista Administrador
+            </button>
+        </a>
+        <a href="{% url 'vendedor' %}" class="button-link">
+            <button>
+                <img src="https://img.icons8.com/ios/50/000000/sales-performance.png" alt="Vendedor Icon">
+                Vendedor
+            </button>
+        </a>
+        <a href="{% url 'pedidos_pendientes' %}" class="button-link">
+            <button>
+                <img src="https://img.icons8.com/ios/50/000000/warehouse.png" alt="Bodeguero Icon">
+                Bodeguero
+            </button>
+        </a>
+        <a href="{% url 'consultar_precios' %}" class="button-link">
+            <button>
+                <img src="https://img.icons8.com/ios/50/000000/customer-insight.png" alt="Cliente Icon">
+                Cliente
+            </button>
+        </a>
     </div>
 
 </body>
